@@ -1,0 +1,11 @@
+<script lang="ts">
+defineOptions({
+  name: 'LaboratoryView',
+})
+</script>
+
+<template>
+  <div></div>
+</template>
+
+<style scoped></style>
