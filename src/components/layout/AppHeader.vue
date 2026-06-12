@@ -1,6 +1,21 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { NButton } from 'naive-ui'
 import { Icon } from '@iconify/vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const menuList = computed(() => {
+  const routes = router.getRoutes()
+
+  return routes
+    .filter((r) => r.path !== '/')
+    .map((r) => ({
+      path: r.path,
+      title: r.meta?.title,
+    }))
+})
 </script>
 
 <template>
@@ -16,15 +31,9 @@ import { Icon } from '@iconify/vue'
 
       <!-- Center -->
       <nav class="flex items-center gap-10">
-        <RouterLink to="/" class="nav-link active"> 首页 </RouterLink>
-
-        <RouterLink to="/projects"> 项目 </RouterLink>
-
-        <RouterLink to="/labs"> 实验室 </RouterLink>
-
-        <RouterLink to="/notes"> 笔记 </RouterLink>
-
-        <RouterLink to="/about"> 关于我 </RouterLink>
+        <RouterLink v-for="menu in menuList" :key="menu.path" :to="menu.path" class="nav-link">
+          {{ menu.title }}
+        </RouterLink>
       </nav>
 
       <!-- Right -->

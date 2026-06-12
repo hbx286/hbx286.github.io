@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import AppHeader from '@/components/layout/AppHeader.vue'
-
 defineOptions({
   name: 'HomeView',
 })
@@ -8,7 +6,7 @@ defineOptions({
 
 <template>
   <div>
-    <app-header />
+    <h1>Home</h1>
   </div>
 </template>
 
