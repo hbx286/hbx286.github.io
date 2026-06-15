@@ -4,6 +4,7 @@ defineOptions({
 })
 import ProfileCard from '@/components/home/ProfileCard.vue'
 import IntroductionCard from '@/components/home/IntroductionCard.vue'
+import SkillSection from '@/components/home/SkillSection.vue'
 </script>
 
 <template>
@@ -17,6 +18,7 @@ import IntroductionCard from '@/components/home/IntroductionCard.vue'
         <IntroductionCard />
       </div>
     </div>
+    <SkillSection />
   </div>
 </template>
 

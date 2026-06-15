@@ -3,8 +3,8 @@ import { NCard, NAvatar } from 'naive-ui'
 import { Icon } from '@iconify/vue'
 import StatsCard from './StatsCard.vue'
 
-import { getExperience } from '@/utils/date-utils.ts'
-import { profile } from '@/data/profile.ts'
+import { getExperience } from '@/utils/date-utils'
+import { profile } from '@/data/profile'
 import { computed } from 'vue'
 
 const workYear = computed(() => {
