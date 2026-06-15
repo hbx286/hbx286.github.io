@@ -21,18 +21,33 @@ const menuList = computed(() => {
 
 <template>
   <header class="h-16 border-b backdrop-blur-md" :class="$style.header">
-    <div class="max-w-7xl mx-auto h-full flex items-center justify-between">
+    <div
+      class="max-w-7xl mx-auto h-full flex items-center justify-between"
+    >
       <!-- Left -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-lg border flex items-center justify-center" :class="$style.logoBorder">
+        <div
+          class="w-10 h-10 rounded-lg border flex items-center justify-center"
+          :class="$style.logoBorder"
+        >
           ◇
         </div>
-        <span class="text-xl font-bold" :class="$style.logoText"> HBX Lab </span>
+        <span class="text-xl font-bold" :class="$style.logoText">
+          HBX Lab
+        </span>
       </div>
 
       <!-- Center -->
       <nav class="flex items-center gap-10">
-        <RouterLink v-for="menu in menuList" :key="menu.path" :to="menu.path" :class="[$style.navLink, { [$style.active]: $route.path === menu.path }]">
+        <RouterLink
+          v-for="menu in menuList"
+          :key="menu.path"
+          :to="menu.path"
+          :class="[
+            $style.navLink,
+            { [$style.active]: $route.path === menu.path },
+          ]"
+        >
           {{ menu.title }}
         </RouterLink>
       </nav>

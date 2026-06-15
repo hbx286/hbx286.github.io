@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { Icon } from '@iconify/vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <footer class="border-t py-8 mt-12" :class="$style.footer">

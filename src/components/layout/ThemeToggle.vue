@@ -46,7 +46,10 @@ function handleToggle() {
         @click="handleToggle"
         class="transition-transform duration-300 hover:scale-110 active:scale-95"
       >
-        <Icon :icon="icon" class="text-2xl transition-transform duration-300" />
+        <Icon
+          :icon="icon"
+          class="text-2xl transition-transform duration-300"
+        />
       </NButton>
     </template>
     <span>{{ label }}</span>

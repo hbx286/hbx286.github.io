@@ -6,14 +6,32 @@ import { NCard, NButton } from 'naive-ui'
   <NCard class="introduction-card" :bordered="false">
     <div class="space-y-6">
       <div>
-        <p class="text-slate-400" style="color: var(--color-text-secondary)">Hi, I'm</p>
+        <p
+          class="text-slate-400"
+          style="color: var(--color-text-secondary)"
+        >
+          Hi, I'm
+        </p>
 
-        <h1 class="text-5xl font-bold mt-2" style="color: var(--color-text)">hbx</h1>
+        <h1
+          class="text-5xl font-bold mt-2"
+          style="color: var(--color-text)"
+        >
+          hbx
+        </h1>
       </div>
 
-      <p class="text-xl leading-9" style="color: var(--color-text-secondary)">专注于后端开发、数据平台建设与 AI 应用探索</p>
+      <p
+        class="text-xl leading-9"
+        style="color: var(--color-text-secondary)"
+      >
+        专注于后端开发、数据平台建设与 AI 应用探索
+      </p>
 
-      <div class="text-slate-400 space-y-2" style="color: var(--color-text-muted)">
+      <div
+        class="text-slate-400 space-y-2"
+        style="color: var(--color-text-muted)"
+      >
         <p>3年开发经验</p>
         <p>Python · FastAPI · PostgreSQL · Doris</p>
         <p>正在学习 Kubernetes · Flink · Agent</p>

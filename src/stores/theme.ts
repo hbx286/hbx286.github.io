@@ -50,7 +50,8 @@ export const useThemeStore = defineStore('theme', () => {
   }
 
   // 存储当前监听器引用
-  let mediaQueryListener: ((e: MediaQueryListEvent) => void) | null = null
+  let mediaQueryListener: ((e: MediaQueryListEvent) => void) | null =
+    null
 
   // 使用 watch 的 immediate: true 来初始化主题
   watch(
@@ -58,7 +59,9 @@ export const useThemeStore = defineStore('theme', () => {
     (newMode: ThemeMode) => {
       // 移除旧的监听器
       if (mediaQueryListener) {
-        window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', mediaQueryListener)
+        window
+          .matchMedia('(prefers-color-scheme: dark)')
+          .removeEventListener('change', mediaQueryListener)
         mediaQueryListener = null
       }
 
@@ -66,23 +69,32 @@ export const useThemeStore = defineStore('theme', () => {
 
       if (newMode === 'auto') {
         // 应用当前系统偏好
-        applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches)
+        applyTheme(
+          window.matchMedia('(prefers-color-scheme: dark)').matches,
+        )
         // 添加新的监听器
         mediaQueryListener = (e: MediaQueryListEvent) => {
           applyTheme(e.matches)
         }
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', mediaQueryListener)
+        window
+          .matchMedia('(prefers-color-scheme: dark)')
+          .addEventListener('change', mediaQueryListener)
       } else {
         applyTheme(newMode === 'dark')
       }
     },
-    { immediate: true }
+    { immediate: true },
   )
 
   function toggle() {
-    const modes: readonly ThemeMode[] = ['dark', 'light', 'auto'] as const
+    const modes: readonly ThemeMode[] = [
+      'dark',
+      'light',
+      'auto',
+    ] as const
     const currentIndex = modes.indexOf(mode.value)
-    const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % modes.length : 0
+    const nextIndex =
+      currentIndex >= 0 ? (currentIndex + 1) % modes.length : 0
     mode.value = modes[nextIndex]!
   }
 

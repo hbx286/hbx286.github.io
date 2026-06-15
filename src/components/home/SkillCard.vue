@@ -18,9 +18,16 @@ defineProps<{
   >
     <!-- Header -->
     <div class="flex items-center gap-3 mb-5">
-      <Icon :icon="icon" class="text-2xl" style="color: var(--color-primary)" />
+      <Icon
+        :icon="icon"
+        class="text-2xl"
+        style="color: var(--color-primary)"
+      />
 
-      <h3 class="text-lg font-semibold" style="color: var(--color-text)">
+      <h3
+        class="text-lg font-semibold"
+        style="color: var(--color-text)"
+      >
         {{ title }}
       </h3>
     </div>

@@ -4,7 +4,13 @@ export const skills: SkillGroup[] = [
   {
     title: '后端开发',
     icon: 'mdi:code-braces',
-    skills: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'Asyncio'],
+    skills: [
+      'Python',
+      'FastAPI',
+      'PostgreSQL',
+      'SQLAlchemy',
+      'Asyncio',
+    ],
   },
 
   {

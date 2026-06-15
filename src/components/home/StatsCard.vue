@@ -27,10 +27,16 @@ defineProps<{
 
       <!-- 右侧内容 -->
       <div class="flex flex-col items-start justify-center text-left">
-        <span class="text-xs tracking-wider" style="color: var(--color-text-muted)">
+        <span
+          class="text-xs tracking-wider"
+          style="color: var(--color-text-muted)"
+        >
           {{ title }}
         </span>
-        <span class="mt-1 text-sm font-semibold whitespace-nowrap" style="color: var(--color-text)">
+        <span
+          class="mt-1 text-sm font-semibold whitespace-nowrap"
+          style="color: var(--color-text)"
+        >
           {{ value }}
         </span>
       </div>
