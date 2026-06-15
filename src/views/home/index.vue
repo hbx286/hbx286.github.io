@@ -2,12 +2,11 @@
 defineOptions({
   name: 'HomeView',
 })
+import ProfileCard from '@/components/home/ProfileCard.vue'
 </script>
 
 <template>
-  <div>
-    <h1>Home</h1>
-  </div>
+  <profile-card></profile-card>
 </template>
 
 <style scoped></style>
