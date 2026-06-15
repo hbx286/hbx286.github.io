@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NCard } from 'naive-ui'
+import { NCard, NButton } from 'naive-ui'
 </script>
 
 <template>
