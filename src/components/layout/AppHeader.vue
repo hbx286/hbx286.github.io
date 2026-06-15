@@ -30,7 +30,11 @@ const menuList = computed(() => {
           class="w-10 h-10 rounded-lg border flex items-center justify-center"
           :class="$style.logoBorder"
         >
-          ◇
+          <Icon
+            icon="mdi:cube-outline"
+            class="text-2xl"
+            :class="$style.logoIcon"
+          />
         </div>
         <span class="text-xl font-bold" :class="$style.logoText">
           HBX Lab
@@ -70,6 +74,18 @@ const menuList = computed(() => {
 
 .logoBorder {
   border-color: var(--color-primary) !important;
+  box-shadow: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.logoBorder:hover {
+  box-shadow:
+    0 0 15px rgba(34, 211, 238, 0.5),
+    0 0 30px rgba(34, 211, 238, 0.2);
+}
+
+.logoIcon {
+  color: var(--color-primary) !important;
 }
 
 .logoText {
