@@ -1,8 +1,5 @@
-<script setup lang="ts">
-import { NButton } from 'naive-ui'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="bg-blue-500 text-white">Hello HBX</div>
-  <NButton type="primary"> Hello HBX </NButton>
+  <RouterView />
 </template>
