@@ -14,15 +14,15 @@ const workYear = computed(() => {
 
 <template>
   <NCard class="profile-card" :bordered="false">
-    <div class="flex flex-col items-center text-center gap-4">
+    <div class="flex flex-col items-center gap-6">
       <!-- Avatar -->
       <NAvatar :size="90" :src="profile.avatar" round />
 
       <!-- Name -->
-      <div>
-        <div class="text-xl font-semibold">
+      <div class="text-center">
+        <h2 class="text-2xl font-bold">
           {{ profile.name }}
-        </div>
+        </h2>
         <!-- <div class="text-sm text-gray-500 mt-1">
           {{ profile.role }}
         </div> -->

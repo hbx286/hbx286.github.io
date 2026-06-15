@@ -22,8 +22,7 @@ defineProps<{
         <span class="text-xs tracking-wider text-slate-500">
           {{ title }}
         </span>
-
-        <span class="mt-1 text-sm font-semibold text-white">
+        <span class="mt-1 text-sm font-semibold text-white whitespace-nowrap">
           {{ value }}
         </span>
       </div>
