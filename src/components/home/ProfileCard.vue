@@ -20,12 +20,9 @@ const workYear = computed(() => {
 
       <!-- Name -->
       <div class="text-center">
-        <h2 class="text-2xl font-bold">
+        <h2 class="text-2xl font-bold" style="color: var(--color-text)">
           {{ profile.name }}
         </h2>
-        <!-- <div class="text-sm text-gray-500 mt-1">
-          {{ profile.role }}
-        </div> -->
       </div>
 
       <!-- Info -->
@@ -52,6 +49,7 @@ const workYear = computed(() => {
   max-width: 400px;
   border-radius: 14px;
   backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
 }
 </style>
