@@ -4,16 +4,16 @@ import AppFooter from '@/components/layout/AppFooter.vue'
 </script>
 
 <template>
-  <div class="h-screen flex flex-col theme-transition">
+  <div class="flex flex-col min-h-screen theme-transition">
     <AppHeader />
 
-    <div class="flex-1 overflow-auto">
+    <main class="flex-1">
       <RouterView v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
         </transition>
       </RouterView>
-    </div>
+    </main>
 
     <AppFooter />
   </div>

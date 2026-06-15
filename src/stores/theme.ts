@@ -3,15 +3,41 @@ import { ref, watch } from 'vue'
 
 export type ThemeMode = 'dark' | 'light' | 'auto'
 
-export const useThemeStore = defineStore('theme', () => {
-  const mode = ref<ThemeMode>('auto')
-  const isDark = ref<boolean>(true)
+// 内存存储（用于无痕模式）
+let memoryMode: ThemeMode = 'auto'
+const memoryIsDark: boolean = true
 
-  // Initialize from localStorage
-  const saved = typeof localStorage !== 'undefined' ? localStorage.getItem('theme-mode') as ThemeMode | null : null
-  if (saved && ['dark', 'light', 'auto'].includes(saved)) {
-    mode.value = saved
+function isLocalStorageAvailable(): boolean {
+  try {
+    const test = '__storage_test__'
+    localStorage.setItem(test, test)
+    localStorage.removeItem(test)
+    return true
+  } catch {
+    return false
   }
+}
+
+function getThemeModeFromStorage(): ThemeMode {
+  if (isLocalStorageAvailable()) {
+    const saved = localStorage.getItem('theme-mode') as ThemeMode | null
+    if (saved && ['dark', 'light', 'auto'].includes(saved)) {
+      return saved
+    }
+  }
+  return memoryMode
+}
+
+function setThemeModeToStorage(mode: ThemeMode) {
+  memoryMode = mode
+  if (isLocalStorageAvailable()) {
+    localStorage.setItem('theme-mode', mode)
+  }
+}
+
+export const useThemeStore = defineStore('theme', () => {
+  const mode = ref<ThemeMode>(getThemeModeFromStorage())
+  const isDark = ref<boolean>(memoryIsDark)
 
   function applyTheme(dark: boolean) {
     isDark.value = dark
@@ -23,38 +49,35 @@ export const useThemeStore = defineStore('theme', () => {
     }
   }
 
-  function init() {
-    // 初始应用
-    if (mode.value === 'auto') {
-      applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches)
-    } else {
-      applyTheme(mode.value === 'dark')
-    }
+  // 存储当前监听器引用
+  let mediaQueryListener: ((e: MediaQueryListEvent) => void) | null = null
 
-    // 监听系统偏好变化
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    const handler = (e: MediaQueryListEvent) => {
-      if (mode.value === 'auto') {
-        applyTheme(e.matches)
+  // 使用 watch 的 immediate: true 来初始化主题
+  watch(
+    () => mode.value,
+    (newMode: ThemeMode) => {
+      // 移除旧的监听器
+      if (mediaQueryListener) {
+        window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', mediaQueryListener)
+        mediaQueryListener = null
       }
-    }
-    mediaQuery.addEventListener('change', handler)
 
-    // 监听 mode 变化
-    watch(
-      () => mode.value,
-      (newMode: ThemeMode) => {
-        if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('theme-mode', newMode)
+      setThemeModeToStorage(newMode)
+
+      if (newMode === 'auto') {
+        // 应用当前系统偏好
+        applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches)
+        // 添加新的监听器
+        mediaQueryListener = (e: MediaQueryListEvent) => {
+          applyTheme(e.matches)
         }
-        if (newMode === 'auto') {
-          applyTheme(mediaQuery.matches)
-        } else {
-          applyTheme(newMode === 'dark')
-        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', mediaQueryListener)
+      } else {
+        applyTheme(newMode === 'dark')
       }
-    )
-  }
+    },
+    { immediate: true }
+  )
 
   function toggle() {
     const modes: readonly ThemeMode[] = ['dark', 'light', 'auto'] as const
@@ -70,7 +93,6 @@ export const useThemeStore = defineStore('theme', () => {
   return {
     mode,
     isDark,
-    init,
     toggle,
     setMode,
   }
