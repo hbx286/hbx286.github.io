@@ -1,5 +1,20 @@
 <script setup lang="ts">
 import { NCard, NButton } from 'naive-ui'
+import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+
+import { profile } from '@/data/profile'
+import { getExperience } from '@/utils/date-utils'
+
+const router = useRouter()
+
+const workYear = computed(() => {
+  return getExperience(profile.startWorkDate)
+})
+
+function navigateTo(path: string) {
+  router.push(path)
+}
 </script>
 
 <template>
@@ -17,7 +32,7 @@ import { NCard, NButton } from 'naive-ui'
           class="text-5xl font-bold mt-2"
           style="color: var(--color-text)"
         >
-          hbx
+          {{ profile.name }}
         </h1>
       </div>
 
@@ -32,15 +47,15 @@ import { NCard, NButton } from 'naive-ui'
         class="text-slate-400 space-y-2"
         style="color: var(--color-text-muted)"
       >
-        <p>3年开发经验</p>
+        <p>{{ workYear }}开发经验</p>
         <p>Python · FastAPI · PostgreSQL · Doris</p>
         <p>正在学习 Kubernetes · Flink · Agent</p>
       </div>
     </div>
     <div class="mt-8 flex gap-4">
-      <NButton type="primary"> 查看项目 </NButton>
+      <NButton type="primary" @click="navigateTo('/project')"> 查看项目 </NButton>
 
-      <NButton secondary> 联系我 </NButton>
+      <NButton secondary @click="navigateTo('/about')"> 联系我 </NButton>
     </div>
   </NCard>
 </template>

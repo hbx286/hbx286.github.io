@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <div
-    class="group rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1"
+    class="group skill-card rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1"
     :style="{
       borderColor: 'var(--color-border)',
       backgroundColor: 'var(--color-card)',
@@ -53,7 +53,7 @@ defineProps<{
 <style scoped>
 @reference "tailwindcss";
 
-div:hover {
+.skill-card:hover {
   border-color: var(--color-primary) !important;
   box-shadow: 0 0 24px rgba(34, 211, 238, 0.12);
 }
