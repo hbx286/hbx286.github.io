@@ -10,12 +10,12 @@ import SkillSection from '@/components/home/SkillSection.vue'
 <template>
   <div class="max-w-7xl mx-auto px-6 py-12">
     <div class="grid grid-cols-12 gap-8">
-      <div class="col-span-12 md:col-span-4 h-full">
-        <ProfileCard />
-      </div>
-
       <div class="col-span-12 md:col-span-8 h-full">
         <IntroductionCard />
+      </div>
+
+      <div class="col-span-12 md:col-span-4 h-full">
+        <ProfileCard />
       </div>
     </div>
     <SkillSection />
