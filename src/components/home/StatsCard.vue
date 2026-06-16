@@ -28,7 +28,7 @@ defineProps<{
         {{ title }}
       </span>
       <span
-        class="text-sm font-semibold"
+        class="text-xs leading-snug"
         style="color: var(--color-text)"
       >
         {{ value }}

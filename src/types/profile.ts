@@ -4,4 +4,6 @@ export interface Profile {
   location: string
   startWorkDate: string
   githubUrl: string
+  languages: string[]
+  exploring: string[]
 }
