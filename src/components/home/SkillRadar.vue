@@ -63,7 +63,7 @@ onMounted(async () => {
 
   const el = containerRef.value!
 
-  const graphNodes = overlayNodes.map((n) => ({
+  const graphNodes: ({ id: string; val: number } & { x?: number; y?: number })[] = overlayNodes.map((n) => ({
     id: n.id,
     val: n.isGroup ? 22 : 8,
   }))
