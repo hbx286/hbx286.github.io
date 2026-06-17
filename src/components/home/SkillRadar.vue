@@ -17,7 +17,7 @@ const hoverId = ref<string | null>(null)
 interface OverlayNode {
   id: string
   name: string
-  iconName: string
+  icon: string
   color: string
   isGroup: boolean
 }
@@ -31,7 +31,7 @@ props.groups.forEach((g, gi) => {
   overlayNodes.push({
     id: gid,
     name: g.title,
-    iconName: g.icon.replace('mdi:', ''),
+    icon: g.icon,
     color: g.color,
     isGroup: true,
   })
@@ -41,7 +41,7 @@ props.groups.forEach((g, gi) => {
     overlayNodes.push({
       id: sid,
       name: s.name,
-      iconName: s.icon.replace('mdi:', ''),
+      icon: s.icon,
       color: g.color,
       isGroup: false,
     })
@@ -154,14 +154,15 @@ onUnmounted(() => {
         :style="{ left: 0, top: 0, color: node.color }"
       >
         <div v-if="node.isGroup" class="group-node">
-          <Icon :icon="`mdi:${node.iconName}`" class="group-icon" />
+          <Icon :icon="node.icon" class="group-icon" />
         </div>
         <div v-else class="skill-node">
-          <Icon :icon="`mdi:${node.iconName}`" class="skill-icon" />
+          <Icon :icon="node.icon" class="skill-icon" />
         </div>
         <span v-if="node.isGroup" class="group-label">{{
           node.name
         }}</span>
+        <span v-else class="skill-label">{{ node.name }}</span>
       </div>
     </div>
   </div>
@@ -174,11 +175,12 @@ onUnmounted(() => {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: var(--color-primary);
+  background-color: currentColor;
   display: flex;
   align-items: center;
   justify-content: center;
   transform: translate(-50%, -50%);
+  transition: box-shadow 0.2s;
 }
 
 .group-icon {
@@ -216,17 +218,37 @@ onUnmounted(() => {
   color: currentColor;
 }
 
+.skill-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: 18px;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+
+.overlay-active .skill-label {
+  opacity: 1;
+}
+
 .overlay-active .skill-node {
   border-width: 3px;
   box-shadow: 0 0 12px currentColor;
 }
 
 .overlay-active .group-node {
-  box-shadow: 0 0 16px var(--color-primary);
+  box-shadow: 0 0 16px currentColor;
 }
 
 .overlay-active .group-label {
-  color: var(--color-primary);
+  color: currentColor;
   font-weight: 700;
 }
 
