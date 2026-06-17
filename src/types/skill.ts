@@ -1,5 +1,11 @@
+export interface Skill {
+  name: string
+  icon: string
+}
+
 export interface SkillGroup {
   title: string
   icon: string
-  skills: string[]
+  color: string
+  skills: Skill[]
 }

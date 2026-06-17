@@ -15,8 +15,10 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "@iconify-json/mdi": "^1.2.3",
     "@iconify/vue": "^5.0.1",
     "@tailwindcss/vite": "^4.3.0",
+    "force-graph": "^1.51.4",
     "naive-ui": "^2.44.1",
     "pinia": "^3.0.4",
     "tailwindcss": "^4.3.0",
