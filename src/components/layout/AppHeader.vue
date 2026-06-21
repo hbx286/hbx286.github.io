@@ -4,8 +4,13 @@ import { NButton } from 'naive-ui'
 import { Icon } from '@iconify/vue'
 import { useRouter } from 'vue-router'
 import ThemeToggle from './ThemeToggle.vue'
+import { profile } from '@/data/profile'
 
 const router = useRouter()
+
+function openGithub() {
+  window.open(profile.githubUrl, '_blank')
+}
 
 const menuList = computed(() => {
   const routes = router.getRoutes()
@@ -58,7 +63,7 @@ const menuList = computed(() => {
 
       <!-- Right -->
       <div class="flex items-center gap-4">
-        <NButton quaternary circle>
+        <NButton quaternary circle @click="openGithub">
           <Icon icon="mdi:github" class="text-2xl" />
         </NButton>
         <ThemeToggle />

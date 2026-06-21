@@ -3,4 +3,7 @@ export interface Profile {
   avatar: string
   location: string
   startWorkDate: string
+  githubUrl: string
+  languages: string[]
+  exploring: string[]
 }
