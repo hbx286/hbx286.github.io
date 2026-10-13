@@ -10,10 +10,11 @@ defineProps<{
 
 <template>
   <div
-    class="group flex flex-col rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1"
+    class="project-card group flex flex-col rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1"
     :style="{
       borderColor: 'var(--color-border)',
-      backgroundColor: 'color-mix(in srgb, var(--color-card) 60%, transparent)',
+      backgroundColor:
+        'color-mix(in srgb, var(--color-card) 60%, transparent)',
     }"
   >
     <!-- Header -->
@@ -21,7 +22,8 @@ defineProps<{
       <div
         class="flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
         :style="{
-          backgroundColor: 'color-mix(in srgb, var(--color-primary) 12%, transparent)',
+          backgroundColor:
+            'color-mix(in srgb, var(--color-primary) 12%, transparent)',
           color: 'var(--color-primary)',
         }"
       >
@@ -79,9 +81,13 @@ defineProps<{
 <style scoped>
 @reference "tailwindcss";
 
-div:hover {
+.project-card:hover {
   border-color: var(--color-border-hover) !important;
   box-shadow: 0 0 24px rgba(34, 211, 238, 0.12);
-  background: color-mix(in srgb, var(--color-card) 80%, transparent) !important;
+  background: color-mix(
+    in srgb,
+    var(--color-card) 80%,
+    transparent
+  ) !important;
 }
 </style>

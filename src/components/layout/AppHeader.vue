@@ -16,10 +16,10 @@ const menuList = computed(() => {
   const routes = router.getRoutes()
 
   return routes
-    .filter((r) => r.path !== '/')
+    .filter((route) => typeof route.meta.title === 'string')
     .map((r) => ({
       path: r.path,
-      title: r.meta?.title,
+      title: r.meta.title,
     }))
 })
 </script>
@@ -41,7 +41,10 @@ const menuList = computed(() => {
             :class="$style.logoIcon"
           />
         </div>
-        <span class="text-xl font-bold tracking-tight" :class="$style.logoText">
+        <span
+          class="text-xl font-bold tracking-tight"
+          :class="$style.logoText"
+        >
           HBX Lab
         </span>
       </div>
@@ -54,7 +57,11 @@ const menuList = computed(() => {
           :to="menu.path"
           :class="[
             $style.navLink,
-            { [$style.active]: $route.path === menu.path || (menu.path === '/home' && $route.path === '/') },
+            {
+              [$style.active]:
+                $route.path === menu.path ||
+                (menu.path === '/home' && $route.path === '/'),
+            },
           ]"
         >
           {{ menu.title }}
@@ -120,7 +127,9 @@ const menuList = computed(() => {
   height: 2px;
   background: var(--color-primary);
   border-radius: 2px;
-  transition: width 0.3s var(--ease-out-expo), left 0.3s var(--ease-out-expo);
+  transition:
+    width 0.3s var(--ease-out-expo),
+    left 0.3s var(--ease-out-expo);
 }
 
 .navLink:hover::before {
@@ -144,7 +153,9 @@ const menuList = computed(() => {
     0 0 10px var(--color-primary),
     0 0 20px var(--color-primary);
   border-radius: 2px;
-  transition: width 0.3s var(--ease-out-expo), left 0.3s var(--ease-out-expo);
+  transition:
+    width 0.3s var(--ease-out-expo),
+    left 0.3s var(--ease-out-expo);
 }
 
 .navLink.active::after {

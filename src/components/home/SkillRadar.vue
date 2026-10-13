@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Icon } from '@iconify/vue'
+import type ForceGraph from 'force-graph'
 import type { SkillGroup } from '@/types/skill'
 
 const props = defineProps<{
@@ -10,8 +11,21 @@ const props = defineProps<{
 const containerRef = ref<HTMLDivElement>()
 const wrapperRef = ref<HTMLDivElement>()
 
-let graph: any = null
+interface GraphNode {
+  id: string
+  val: number
+  x?: number
+  y?: number
+}
+
+interface GraphLink {
+  source: string | GraphNode
+  target: string | GraphNode
+}
+
+let graph: ForceGraph<GraphNode, GraphLink> | null = null
 let resizeObserver: ResizeObserver | null = null
+let disposed = false
 const hoverId = ref<string | null>(null)
 
 interface OverlayNode {
@@ -23,7 +37,7 @@ interface OverlayNode {
 }
 
 const overlayNodes: OverlayNode[] = []
-const links: { source: string; target: string }[] = []
+const links: GraphLink[] = []
 const adj: Record<string, string[]> = {}
 
 props.groups.forEach((g, gi) => {
@@ -57,44 +71,48 @@ function isConnected(id: string): boolean {
   return adj[hoverId.value]?.includes(id) ?? false
 }
 
+function nodeId(node: string | GraphNode): string {
+  return typeof node === 'string' ? node : node.id
+}
+
 onMounted(async () => {
-  const ForceGraphMod: any = await import('force-graph')
-  const ForceGraph = ForceGraphMod.default
+  const { default: ForceGraphConstructor } = await import('force-graph')
 
-  const el = containerRef.value!
+  const el = containerRef.value
+  if (disposed || !el) return
 
-  const graphNodes: ({ id: string; val: number } & { x?: number; y?: number })[] = overlayNodes.map((n) => ({
+  const graphNodes: GraphNode[] = overlayNodes.map((n) => ({
     id: n.id,
     val: n.isGroup ? 22 : 8,
   }))
+  const colorById = new Map(
+    overlayNodes.map((node) => [node.id, node.color]),
+  )
 
-  graph = new ForceGraph(el)
+  const instance = new ForceGraphConstructor<GraphNode, GraphLink>(el)
+  graph = instance
+  instance
     .graphData({ nodes: graphNodes, links })
     .width(el.clientWidth)
     .height(540)
     .backgroundColor('rgba(0,0,0,0)')
     .nodeCanvasObject(() => {})
     .nodeLabel(() => '')
-    .linkColor((l: any) => {
-      const src = typeof l.source === 'object' ? l.source : null
-      const srcId = src?.id || l.source
-      const tgtId =
-        typeof l.target === 'object' ? l.target?.id : l.target
-      const c =
-        overlayNodes.find((n) => n.id === srcId)?.color || '#888'
+    .linkColor((link) => {
+      const srcId = nodeId(link.source)
+      const tgtId = nodeId(link.target)
+      const color = colorById.get(srcId) ?? '#888'
       if (hoverId.value) {
         return srcId === hoverId.value || tgtId === hoverId.value
-          ? c + 'aa'
-          : c + '15'
+          ? color + 'aa'
+          : color + '15'
       }
-      return c + '45'
+      return color + '45'
     })
-    .linkWidth((l: any) => {
+    .linkWidth((link) => {
       if (!hoverId.value) return 0.5
-      const srcId =
-        typeof l.source === 'object' ? l.source?.id : l.source
-      const tgtId =
-        typeof l.target === 'object' ? l.target?.id : l.target
+      const srcId = nodeId(link.source)
+      const tgtId = nodeId(link.target)
       return srcId === hoverId.value || tgtId === hoverId.value
         ? 1.5
         : 0.2
@@ -104,33 +122,36 @@ onMounted(async () => {
     .d3VelocityDecay(0.3)
     .enableNodeDrag(true)
     .enableZoomInteraction(true)
-    .onNodeHover((node: any) => {
+    .onNodeHover((node) => {
       hoverId.value = node?.id ?? null
     })
-    .onEngineStop(() => graph?.zoomToFit(400, 80))
+    .onEngineStop(() => instance.zoomToFit(400, 80))
     .onRenderFramePost(() => {
       for (const gn of graphNodes) {
         if (gn.x === undefined || gn.y === undefined) continue
-        const pos = graph.graph2ScreenCoords(gn.x, gn.y)
-        const overlay = document.getElementById(`ov-${gn.id}`)
+        const pos = instance.graph2ScreenCoords(gn.x, gn.y)
+        const overlay = wrapperRef.value?.querySelector<HTMLElement>(
+          `#ov-${gn.id}`,
+        )
         if (!overlay) continue
         overlay.style.transform = `translate(${pos.x}px, ${pos.y}px)`
       }
     })
 
-  const linkForce = graph.d3Force('link')
+  const linkForce = instance.d3Force('link')
   if (linkForce) linkForce.distance(220)
 
   resizeObserver = new ResizeObserver(() => {
-    if (graph && el) graph.width(el.clientWidth)
+    instance.width(el.clientWidth)
   })
   resizeObserver.observe(el)
 })
 
 onUnmounted(() => {
+  disposed = true
   resizeObserver?.disconnect()
-  const el = containerRef.value
-  if (el) el.innerHTML = ''
+  graph?._destructor()
+  graph = null
 })
 </script>
 

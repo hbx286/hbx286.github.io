@@ -19,7 +19,7 @@ function navigateTo(path: string) {
 
 <template>
   <NCard
-    class="introduction-card"
+    class="glass-card"
     :bordered="false"
     content-style="height: 100%; display: flex; flex-direction: column;"
   >
@@ -71,25 +71,6 @@ function navigateTo(path: string) {
 </template>
 
 <style scoped>
-.introduction-card {
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  backdrop-filter: blur(12px);
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  transition:
-    border-color 0.3s var(--ease-out-expo),
-    box-shadow 0.3s var(--ease-out-expo);
-}
-
-.introduction-card:hover {
-  border-color: var(--color-border-hover);
-  box-shadow:
-    0 4px 24px -4px var(--glow-primary),
-    0 0 0 1px var(--color-border-hover);
-}
-
 .gradient-btn {
   height: 38px;
   padding: 0 22px;

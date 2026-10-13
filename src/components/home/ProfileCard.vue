@@ -17,7 +17,7 @@ const exploring = computed(() => profile.exploring.join(' · '))
 
 <template>
   <NCard
-    class="profile-card"
+    class="glass-card"
     :bordered="false"
     content-style="height: 100%; display: flex; flex-direction: column;"
   >
@@ -64,24 +64,3 @@ const exploring = computed(() => profile.exploring.join(' · '))
     </div>
   </NCard>
 </template>
-
-<style scoped>
-.profile-card {
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  backdrop-filter: blur(12px);
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  transition:
-    border-color 0.3s var(--ease-out-expo),
-    box-shadow 0.3s var(--ease-out-expo);
-}
-
-.profile-card:hover {
-  border-color: var(--color-border-hover);
-  box-shadow:
-    0 4px 24px -4px var(--glow-primary),
-    0 0 0 1px var(--color-border-hover);
-}
-</style>
