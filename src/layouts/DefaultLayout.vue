@@ -22,12 +22,21 @@ import AppFooter from '@/components/layout/AppFooter.vue'
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s var(--ease-out-expo), transform 0.35s var(--ease-out-expo);
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+  transform: translateY(8px);
+}
+
+.fade-enter-from {
+  transform: translateY(8px);
+}
+
+.fade-leave-to {
+  transform: translateY(-4px);
 }
 
 .theme-transition {

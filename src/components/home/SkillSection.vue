@@ -10,12 +10,12 @@ const showGraph = ref(false)
 
 <template>
   <section class="mt-24">
-    <div class="mb-10 flex items-end justify-between">
+    <div class="mb-8 flex items-end justify-between">
       <div>
         <h2 class="text-3xl font-bold" style="color: var(--color-text)">
           技术栈
         </h2>
-        <p class="mt-2" style="color: var(--color-text-secondary)">
+        <p class="mt-1.5 text-sm" style="color: var(--color-text-secondary)">
           当前主要使用的技术与研究方向
         </p>
       </div>
@@ -70,7 +70,7 @@ const showGraph = ref(false)
     <!-- Card view (default) -->
     <div
       v-if="!showGraph"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"
     >
       <SkillCard
         v-for="item in skills"
@@ -85,8 +85,8 @@ const showGraph = ref(false)
     <!-- Graph view -->
     <div
       v-else
-      class="rounded-2xl p-6 backdrop-blur-md"
-      :style="{ backgroundColor: 'var(--color-card)' }"
+      class="rounded-2xl p-6 backdrop-blur-md border"
+      :style="{ backgroundColor: 'var(--color-card)', borderColor: 'var(--color-border)' }"
     >
       <SkillRadar :groups="skills" />
     </div>

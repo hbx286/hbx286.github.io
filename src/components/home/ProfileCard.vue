@@ -25,15 +25,18 @@ const exploring = computed(() => profile.exploring.join(' · '))
       <!-- Avatar -->
       <NAvatar :size="90" :src="profile.avatar" round />
 
-      <!-- Name -->
+      <!-- Name & Tagline -->
       <div class="text-center">
         <h2 class="text-2xl font-bold" style="color: var(--color-text)">
           {{ profile.name }}
         </h2>
+        <p class="text-sm mt-1" style="color: var(--color-text-muted)">
+          Backend · Data · AI
+        </p>
       </div>
 
       <!-- Info -->
-      <div class="grid grid-cols-2 gap-3 w-full">
+      <div class="grid grid-cols-2 gap-2.5 w-full">
         <StatsCard title="地点" :value="profile.location">
           <template #icon>
             <Icon icon="mdi:map-marker-outline" />
@@ -66,9 +69,19 @@ const exploring = computed(() => profile.exploring.join(' · '))
 .profile-card {
   width: 100%;
   height: 100%;
-  border-radius: 14px;
-  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
   background: var(--color-card);
   border: 1px solid var(--color-border);
+  transition:
+    border-color 0.3s var(--ease-out-expo),
+    box-shadow 0.3s var(--ease-out-expo);
+}
+
+.profile-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow:
+    0 4px 24px -4px var(--glow-primary),
+    0 0 0 1px var(--color-border-hover);
 }
 </style>

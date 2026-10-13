@@ -27,14 +27,14 @@ function navigateTo(path: string) {
       <div class="space-y-6">
         <div>
           <p
-            class="text-slate-400"
+            class="text-sm font-medium tracking-wider uppercase"
             style="color: var(--color-text-secondary)"
           >
             Hi, I'm
           </p>
 
           <h1
-            class="text-5xl font-bold mt-2"
+            class="text-5xl font-bold mt-3 leading-tight"
             style="color: var(--color-text)"
           >
             {{ profile.name }}
@@ -42,14 +42,14 @@ function navigateTo(path: string) {
         </div>
 
         <p
-          class="text-xl leading-9"
+          class="text-xl leading-relaxed"
           style="color: var(--color-text-secondary)"
         >
           专注于后端开发、数据平台建设与 AI 应用探索
         </p>
 
         <div
-          class="text-slate-400 space-y-2"
+          class="space-y-1.5 text-sm"
           style="color: var(--color-text-muted)"
         >
           <p>{{ workYear }}开发经验</p>
@@ -74,19 +74,29 @@ function navigateTo(path: string) {
 .introduction-card {
   width: 100%;
   height: 100%;
-  border-radius: 14px;
-  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
   background: var(--color-card);
   border: 1px solid var(--color-border);
+  transition:
+    border-color 0.3s var(--ease-out-expo),
+    box-shadow 0.3s var(--ease-out-expo);
+}
+
+.introduction-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow:
+    0 4px 24px -4px var(--glow-primary),
+    0 0 0 1px var(--color-border-hover);
 }
 
 .gradient-btn {
-  height: 34px;
-  padding: 0 18px;
+  height: 38px;
+  padding: 0 22px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   color: #fff;
   cursor: pointer;
   background: linear-gradient(
@@ -95,34 +105,39 @@ function navigateTo(path: string) {
     var(--color-secondary)
   );
   transition:
-    opacity 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.2s var(--ease-out-expo),
+    box-shadow 0.3s var(--ease-out-expo);
   outline: none;
 }
 
 .gradient-btn:hover {
-  opacity: 0.85;
+  transform: translateY(-1px);
   box-shadow: 0 0 16px rgba(34, 211, 238, 0.25);
 }
 
 .gradient-btn:active {
-  opacity: 0.75;
+  transform: translateY(0);
 }
 
 .outline-btn {
-  height: 34px;
-  padding: 0 18px;
+  height: 38px;
+  padding: 0 22px;
   border: 1px solid var(--color-secondary);
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 14px;
+  font-weight: 500;
   color: var(--color-secondary);
   cursor: pointer;
   background: transparent;
-  transition: all 0.3s ease;
+  transition:
+    transform 0.2s var(--ease-out-expo),
+    background 0.3s ease,
+    box-shadow 0.3s ease;
   outline: none;
 }
 
 .outline-btn:hover {
+  transform: translateY(-1px);
   background: color-mix(
     in srgb,
     var(--color-secondary) 12%,
@@ -132,6 +147,6 @@ function navigateTo(path: string) {
 }
 
 .outline-btn:active {
-  opacity: 0.7;
+  transform: translateY(0);
 }
 </style>

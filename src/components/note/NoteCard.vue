@@ -43,17 +43,17 @@ defineProps<{
 <style scoped>
 .note-card {
   display: block;
-  padding: 20px;
+  padding: 18px 20px;
   border-radius: 14px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   background: var(--color-card);
   border: 1px solid var(--color-border);
-  transition: all 0.3s ease;
+  transition: all 0.3s var(--ease-out-expo);
   text-decoration: none;
 }
 
 .note-card:hover {
-  border-color: var(--color-primary);
+  border-color: var(--color-border-hover);
   box-shadow: 0 0 24px rgba(34, 211, 238, 0.12);
   transform: translateY(-2px);
 }

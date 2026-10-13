@@ -13,27 +13,28 @@ defineProps<{
     <!-- 空状态 -->
     <div
       v-if="projects.length === 0"
-      class="flex flex-col items-center justify-center py-20 text-center"
+      class="flex flex-col items-center justify-center py-24 text-center"
     >
       <div
-        class="flex h-20 w-20 items-center justify-center rounded-full mb-6"
+        class="flex h-24 w-24 items-center justify-center rounded-full mb-6 border"
         :style="{
-          backgroundColor: 'var(--color-card)',
+          backgroundColor: 'color-mix(in srgb, var(--color-card) 60%, transparent)',
+          borderColor: 'var(--color-border)',
           color: 'var(--color-text-muted)',
         }"
       >
-        <Icon icon="mdi:inbox-outline" class="text-4xl" />
+        <Icon icon="mdi:rocket-launch-outline" class="text-4xl" />
       </div>
 
       <h3
-        class="text-xl font-semibold mb-2"
+        class="text-xl font-semibold mb-2 tracking-tight"
         style="color: var(--color-text)"
       >
         暂无项目
       </h3>
 
       <p style="color: var(--color-text-muted)">
-        敬请期待，我会在这里分享我的项目作品
+        项目正在筹备中，敬请期待
       </p>
     </div>
 

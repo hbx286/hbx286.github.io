@@ -39,26 +39,28 @@ const emit = defineEmits<{
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 16px;
+  padding: 5px 14px;
   border-radius: 20px;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s var(--ease-out-expo);
   border: 1px solid var(--color-border);
-  background: transparent;
+  background: var(--color-card);
   color: var(--color-text-secondary);
   outline: none;
 }
 
 .tag-btn:hover {
-  border-color: var(--color-primary);
+  border-color: var(--color-border-hover);
   color: var(--color-primary);
+  transform: translateY(-1px);
 }
 
 .tag-btn.active {
-  border-color: var(--color-primary);
+  border-color: transparent;
   background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
   color: #fff;
+  box-shadow: 0 2px 12px var(--glow-primary);
 }
 
 .tag-count {

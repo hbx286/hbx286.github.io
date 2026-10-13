@@ -44,11 +44,11 @@ function handleToggle() {
         quaternary
         circle
         @click="handleToggle"
-        class="transition-transform duration-300 hover:scale-110 active:scale-95"
+        class="theme-toggle-btn transition-all duration-300 hover:scale-110 active:scale-95"
       >
         <Icon
           :icon="icon"
-          class="text-2xl transition-transform duration-300"
+          class="text-2xl transition-all duration-500"
         />
       </NButton>
     </template>
@@ -58,4 +58,8 @@ function handleToggle() {
 
 <style scoped>
 @reference "tailwindcss";
+
+.theme-toggle-btn:hover :deep(svg) {
+  transform: rotate(180deg);
+}
 </style>

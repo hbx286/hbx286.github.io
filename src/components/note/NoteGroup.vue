@@ -27,9 +27,9 @@ defineProps<{
   font-size: 18px;
   font-weight: 600;
   color: var(--color-text);
-  margin-bottom: 12px;
-  padding-left: 4px;
+  margin-bottom: 16px;
   border-left: 3px solid var(--color-primary);
-  padding-left: 12px;
+  padding-left: 10px;
+  letter-spacing: 0.02em;
 }
 </style>

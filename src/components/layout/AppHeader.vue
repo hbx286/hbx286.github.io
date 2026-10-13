@@ -27,7 +27,7 @@ const menuList = computed(() => {
 <template>
   <header class="h-16 border-b backdrop-blur-md" :class="$style.header">
     <div
-      class="max-w-7xl mx-auto h-full flex items-center justify-between"
+      class="max-w-7xl mx-auto h-full flex items-center justify-between px-6"
     >
       <!-- Left -->
       <div class="flex items-center gap-3">
@@ -41,20 +41,20 @@ const menuList = computed(() => {
             :class="$style.logoIcon"
           />
         </div>
-        <span class="text-xl font-bold" :class="$style.logoText">
+        <span class="text-xl font-bold tracking-tight" :class="$style.logoText">
           HBX Lab
         </span>
       </div>
 
       <!-- Center -->
-      <nav class="flex items-center gap-10">
+      <nav class="flex items-center gap-8">
         <RouterLink
           v-for="menu in menuList"
           :key="menu.path"
           :to="menu.path"
           :class="[
             $style.navLink,
-            { [$style.active]: $route.path === menu.path },
+            { [$style.active]: $route.path === menu.path || (menu.path === '/home' && $route.path === '/') },
           ]"
         >
           {{ menu.title }}
@@ -75,6 +75,9 @@ const menuList = computed(() => {
 <style module scoped>
 .header {
   border-bottom-color: var(--color-border) !important;
+  background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
 }
 
 .logoBorder {
@@ -100,11 +103,29 @@ const menuList = computed(() => {
 .navLink {
   position: relative;
   color: var(--color-text-secondary) !important;
-  transition: color 0.2s ease;
+  transition: color 0.25s var(--ease-out-expo);
+  padding-bottom: 2px;
 }
 
 .navLink:hover {
   color: var(--color-text) !important;
+}
+
+.navLink::before {
+  content: '';
+  position: absolute;
+  bottom: -21px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.3s var(--ease-out-expo), left 0.3s var(--ease-out-expo);
+}
+
+.navLink:hover::before {
+  width: 100%;
+  left: 0;
 }
 
 .navLink.active {
@@ -114,13 +135,20 @@ const menuList = computed(() => {
 .navLink.active::after {
   content: '';
   position: absolute;
-  bottom: -20px;
-  left: 0;
-  width: 100%;
+  bottom: -21px;
+  left: 50%;
+  width: 0;
   height: 2px;
   background: var(--color-primary);
   box-shadow:
     0 0 10px var(--color-primary),
     0 0 20px var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.3s var(--ease-out-expo), left 0.3s var(--ease-out-expo);
+}
+
+.navLink.active::after {
+  width: 100%;
+  left: 0;
 }
 </style>
